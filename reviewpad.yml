@@ -26,3 +26,26 @@ dictionaries:
       devops: '["reviewpad-bot"]'
       developers: '["reviewpad-bot"]'
       humans: '["marcelosousa", "ferreiratiago"]'
+
+workflows:
+  - name: Assign senior reviewers
+    run:
+      - forEach:
+          key: $teamName
+          value: $teamMembers
+          in: $dictionary("teams")
+          do:
+            - if: $isElementOf($author(), $teamMembers)
+              then: 
+                forEach:
+                  key: $teamNameInner
+                  value: $seniorMembers
+                  in: $dictionary("seniors-per-team")
+                  do:
+                    if: $teamName == $teamNameInner
+                    then: $assignReviewer($seniorMembers)
+
+  - name: Block merge on labelling
+    run:
+      - if: $isElementOf("do-not-merge", $labels())
+        then: $failCheckStatus("Do not merge")
