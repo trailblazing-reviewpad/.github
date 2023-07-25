@@ -20,7 +20,7 @@ dictionaries:
       dba: '["joinreviewpad", "engineeringgamma"]'
       devops: '["reviewpad-bot", "engineeringalpha"]'
       developers: '["reviewpad-bot", "engineeringalpha", "engineeringbeta", "engineeringgamma", "joinreviewpad"]'
-      humans: '["adrianoapmartins", "fmallet", "marcelosousa", "ferreiratiago", "zolamk", "shay2025", "FabioFreitasP", "catarinamarcal"]'
+      humans: '["adrianoapmartins", "fmallet", "ferreiratiago", "zolamk", "shay2025", "FabioFreitasP", "catarinamarcal"]'
 
   - name: seniors-per-team
     spec:
