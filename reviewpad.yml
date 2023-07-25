@@ -2,16 +2,8 @@
 # to be used in the entire organization
 
 groups:
- - name: security
-   spec: '["reviewpad-bot", "engineeringalpha", "marcelosousa"]'
- - name: dba
-   spec: '["joinreviewpad", "engineeringgamma"]'
- - name: devops
-   spec: '["reviewpad-bot", "engineeringalpha"]'
- - name: developers
-   spec: '["reviewpad-bot", "engineeringalpha", "engineeringbeta", "engineeringgamma", "joinreviewpad"]'
- - name: humans
-   spec: '["adrianoapmartins", "fmallet", "marcelosousa", "ferreiratiago", "zolamk", "shay2025", "FabioFreitasP", "catarinamarcal"]'
+  - name: reviewers
+    spec: $append($reviewers(), $requestedReviewers())
 
 dictionaries:
   - name: teams
