@@ -10,4 +10,5 @@ groups:
    spec: '["reviewpad-bot", "engineeringalpha"]'
  - name: developers
    spec: '["reviewpad-bot", "engineeringalpha", "engineeringbeta", "engineeringgamma", "joinreviewpad"]'
-
+ - name: humans
+   spec: '["adrianoapmartins", "fmallet", "marcelosousa", "ferreiratiago", "zolamk", "shay2025", "FabioFreitasP", "catarinamarcal"]'
