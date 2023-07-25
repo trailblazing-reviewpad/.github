@@ -5,6 +5,11 @@ groups:
   - name: reviewers
     spec: $append($reviewers(), $requestedReviewers())
 
+labels:
+  do-not-merge:
+    description: Pull request cannot be merged
+    color: "#e63946"
+
 dictionaries:
   - name: teams
     spec:
