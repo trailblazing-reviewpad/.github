@@ -12,3 +12,20 @@ groups:
    spec: '["reviewpad-bot", "engineeringalpha", "engineeringbeta", "engineeringgamma", "joinreviewpad"]'
  - name: humans
    spec: '["adrianoapmartins", "fmallet", "marcelosousa", "ferreiratiago", "zolamk", "shay2025", "FabioFreitasP", "catarinamarcal"]'
+
+dictionaries:
+  - name: teams
+    spec:
+      security: '["reviewpad-bot", "engineeringalpha", "marcelosousa"]'
+      dba: '["joinreviewpad", "engineeringgamma"]'
+      devops: '["reviewpad-bot", "engineeringalpha"]'
+      developers: '["reviewpad-bot", "engineeringalpha", "engineeringbeta", "engineeringgamma", "joinreviewpad"]'
+      humans: '["adrianoapmartins", "fmallet", "marcelosousa", "ferreiratiago", "zolamk", "shay2025", "FabioFreitasP", "catarinamarcal"]'
+
+  - name: seniors-per-team
+    spec:
+      security: '["marcelosousa"]'
+      dba: '["joinreviewpad"]'
+      devops: '["reviewpad-bot"]'
+      developers: '["reviewpad-bot"]'
+      humans: '["marcelosousa", "ferreiratiago"]'
