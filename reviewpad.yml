@@ -1,0 +1,13 @@
+# This Reviewpad YML defines groups of people, rules and workflows
+# to be used in the entire organization
+
+groups:
+ - name: security
+   spec: '["reviewpad-bot", "engineeringalpha", "marcelosousa"]'
+ - name: dba
+   spec: '["joinreviewpad", "engineeringgamma"]'
+ - name: devops
+   spec: '["reviewpad-bot", "engineeringalpha"]'
+ - name: developers
+   spec: '["reviewpad-bot", "engineeringalpha", "engineeringbeta", "engineeringgamma", "joinreviewpad"]'
+
