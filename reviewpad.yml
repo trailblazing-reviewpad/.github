@@ -21,7 +21,7 @@ dictionaries:
 
   - name: seniors-per-team
     spec:
-      security: '["marcelosousa"]'
+      security: '["marcelosousa", "engineeringalpha"]'
       dba: '["joinreviewpad"]'
       devops: '["reviewpad-bot"]'
       developers: '["reviewpad-bot"]'
