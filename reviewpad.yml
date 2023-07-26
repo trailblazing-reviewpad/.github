@@ -8,7 +8,6 @@ dictionaries:
       dba: '["joinreviewpad"]'
       devops: '["reviewpad-bot"]'
       developers: '["reviewpad-bot"]'
-      humans: '["marcelosousa", "ferreiratiago"]'
 
 rules:
   - name: all-reviewers-approved
