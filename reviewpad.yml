@@ -1,10 +1,6 @@
 # This Reviewpad YML defines groups of people, rules and workflows
 # to be used in the entire organization
 
-groups:
-  - name: reviewers
-    spec: $append($reviewers(), $requestedReviewers())
-
 labels:
   do-not-merge:
     description: Pull request cannot be merged
