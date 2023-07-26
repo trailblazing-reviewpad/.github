@@ -23,6 +23,13 @@ dictionaries:
       developers: '["reviewpad-bot"]'
       humans: '["marcelosousa", "ferreiratiago"]'
 
+rules:
+  - name: all-reviewers-approved
+    spec: '$all($append($reviewers(), $requestedReviewers()), ($r: String => $reviewerStatus($r) == "APPROVED"))'
+
+  - name: has-reviewers
+    spec: '$length($append($reviewers(), $requestedReviewers())) > 0'
+
 workflows:
   - name: Assign senior reviewers
     run:
@@ -45,3 +52,17 @@ workflows:
     run:
       - if: $isElementOf("do-not-merge", $labels())
         then: $failCheckStatus("Do not merge")
+
+  - name: Block merge if there are no reviewers
+    run:
+      - if: '!$rule("has-reviewers")'
+        then:
+          - $error("No reviewer was assigned")
+          - $failCheckStatus("No reviewer was assigned")
+
+  - name: Block merge if there are missing approvals
+    run:
+      - if: '!$rule("all-reviewers-approved")'
+        then:
+          - $error("Missing approvals")
+          - $failCheckStatus("Missing approvals")
