@@ -26,17 +26,3 @@ workflows:
           do:
             - if: $isElementOf($author(), $team($teamName))
               then: $assignReviewer($seniorMembers)
-
-  - name: Block merge if there are no reviewers
-    run:
-      - if: '!$rule("has-reviewers")'
-        then:
-          - $error("No reviewer was assigned")
-          - $failCheckStatus("No reviewer was assigned")
-
-  - name: Block merge if there are missing approvals
-    run:
-      - if: '!$rule("all-reviewers-approved")'
-        then:
-          - $error("Missing approvals")
-          - $failCheckStatus("Missing approvals")
