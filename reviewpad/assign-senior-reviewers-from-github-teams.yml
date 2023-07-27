@@ -9,13 +9,6 @@ dictionaries:
       devops: '["reviewpad-bot"]'
       developers: '["reviewpad-bot"]'
 
-rules:
-  - name: all-reviewers-approved
-    spec: '$all($append($reviewers(), $requestedReviewers()), ($r: String => $reviewerStatus($r) == "APPROVED"))'
-
-  - name: has-reviewers
-    spec: '$length($append($reviewers(), $requestedReviewers())) > 0'
-
 workflows:
   - name: Assign senior reviewers
     run:
@@ -24,5 +17,5 @@ workflows:
           value: $seniorMembers
           in: $dictionary("seniors-per-team")
           do:
-            - if: $isElementOf($author(), $team($teamName))
-              then: $assignReviewer($seniorMembers)
+            if: $isElementOf($author(), $team($teamName))
+            then: $assignReviewer($seniorMembers)

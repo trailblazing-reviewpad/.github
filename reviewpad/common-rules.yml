@@ -1,0 +1,8 @@
+# This Reviewpad YML defines common rules to be used in the entire organization
+
+rules:
+  - name: all-reviewers-approved
+    spec: '$all($append($reviewers(), $requestedReviewers()), ($r: String => $reviewerStatus($r) == "APPROVED"))'
+
+  - name: has-reviewers
+    spec: '$length($append($reviewers(), $requestedReviewers())) > 0'

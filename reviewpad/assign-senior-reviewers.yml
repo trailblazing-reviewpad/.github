@@ -1,0 +1,30 @@
+# This Reviewpad YML defines the teams of the organization
+# the senior developers per team and a workflow that assigns
+# senior reviewers to pull requests based on the author team.
+
+dictionaries:
+  - name: teams
+    spec:
+      security: '["reviewpad-bot", "engineeringalpha", "marcelosousa"]'
+      dba: '["joinreviewpad", "engineeringgamma"]'
+      devops: '["reviewpad-bot", "engineeringalpha"]'
+      developers: '["reviewpad-bot", "engineeringalpha", "engineeringbeta", "engineeringgamma", "joinreviewpad"]'
+
+  - name: seniors-per-team
+    spec:
+      security: '["engineeringalpha"]'
+      dba: '["joinreviewpad"]'
+      devops: '["reviewpad-bot"]'
+      developers: '["reviewpad-bot"]'
+
+workflows:
+  - name: Assign senior reviewers
+    run:
+      - forEach:
+          key: $teamName
+          value: $teamMembers
+          in: $dictionary("teams")
+          do:
+            - if: $isElementOf($author(), $teamMembers)
+              then:
+                - $assignReviewer($dictionaryValueFromKey("seniors-per-team", $teamName), 1)

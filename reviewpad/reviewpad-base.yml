@@ -1,0 +1,52 @@
+# This Reviewpad YML defines groups of people, rules and workflows
+# to be used in the entire organization
+
+labels:
+  do-not-merge:
+    description: Pull request cannot be merged
+    color: "#e63946"
+
+dictionaries:
+  - name: seniors-per-team
+    spec:
+      security: '["marcelosousa", "engineeringalpha"]'
+      dba: '["joinreviewpad"]'
+      devops: '["reviewpad-bot"]'
+      developers: '["reviewpad-bot"]'
+
+rules:
+  - name: all-reviewers-approved
+    spec: '$all($append($reviewers(), $requestedReviewers()), ($r: String => $reviewerStatus($r) == "APPROVED"))'
+
+  - name: has-reviewers
+    spec: '$length($append($reviewers(), $requestedReviewers())) > 0'
+
+workflows:
+  - name: Assign senior reviewers
+    run:
+      - forEach:
+          key: $teamName
+          value: $teamMembers
+          in: $dictionary("teams")
+          do:
+            - if: $isElementOf($author(), $teamMembers)
+              then: $assignReviewer($dictionaryValueFromKey("seniors-per-team", $teamName), 1)
+
+  - name: Block merge on labelling
+    run:
+      - if: $isElementOf("do-not-merge", $labels())
+        then: $failCheckStatus("Do not merge")
+
+  - name: Block merge if there are no reviewers
+    run:
+      - if: '!$rule("has-reviewers")'
+        then:
+          - $error("No reviewer was assigned")
+          - $failCheckStatus("No reviewer was assigned")
+
+  - name: Block merge if there are missing approvals
+    run:
+      - if: '!$rule("all-reviewers-approved")'
+        then:
+          - $error("Missing approvals")
+          - $failCheckStatus("Missing approvals")
