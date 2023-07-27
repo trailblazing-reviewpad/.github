@@ -1,0 +1,13 @@
+# This Reviewpad YML defines groups of people, rules and workflows
+# to be used in the entire organization
+
+rules:
+  - name: Code freeze
+    spec: 'true'
+
+workflows:
+  - name: Add code freeze label
+    run:
+      - if: $rule("Code freeze")
+        then: $addLabel("code-freeze")
+        else: $removeLabel("code-freeze")
