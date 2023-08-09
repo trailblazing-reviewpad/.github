@@ -14,3 +14,13 @@ rules:
     run:
       - if: $description() == "" && $createdAt() > 1 day ago
         then: $close("Automatically closing this issue. Please add a description.")
+
+  - name: link issue to project
+    description: Link an issue to Test Project project.
+    on:
+      - issue
+    run:
+      - if: $state() == "open" && !$isLinkedToProject("Test Project") && !$isElementOf("epic", $labels())
+        then: $addToProject("Test Project", "Backlog")
+      - if: $state() == "closed"
+        then: $addToProject("Test Project", "Done")
