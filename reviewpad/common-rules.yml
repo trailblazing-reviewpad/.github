@@ -7,6 +7,7 @@ rules:
   - name: has-reviewers
     spec: '$length($append($reviewers(), $requestedReviewers())) > 0'
 
+workflows:
   - name: empty description on issue
     description: Check if the issue has a description
     on:
