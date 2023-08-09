@@ -4,7 +4,7 @@ workflows:
     on:
       - issue
     run:
-      - if: $description() == "" && $createdAt() > 1 day ago
+      - if: $description() == "" && $createdAt() < 1 day ago
         then: $close("Automatically closing this issue. Please add a description.")
 
   - name: link issue to project
