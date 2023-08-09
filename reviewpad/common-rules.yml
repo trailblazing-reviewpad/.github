@@ -6,22 +6,3 @@ rules:
 
   - name: has-reviewers
     spec: '$length($append($reviewers(), $requestedReviewers())) > 0'
-
-workflows:
-  - name: empty description on issue
-    description: Check if the issue has a description
-    on:
-      - issue
-    run:
-      - if: $description() == ""
-        then: $close("Automatically closing this issue. Please add a description.")
-
-  - name: link issue to project
-    description: Link an issue to Test Project project.
-    on:
-      - issue
-    run:
-      - if: $state() == "open" && !$isLinkedToProject("Test Project")
-        then: $addToProject("Test Project", "Backlog")
-      - if: $state() == "closed"
-        then: $addToProject("Test Project", "Done")
