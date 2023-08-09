@@ -20,7 +20,7 @@ rules:
     on:
       - issue
     run:
-      - if: $state() == "open" && !$isLinkedToProject("Test Project") && !$isElementOf("epic", $labels())
+      - if: $state() == "open" && !$isLinkedToProject("Test Project")
         then: $addToProject("Test Project", "Backlog")
       - if: $state() == "closed"
         then: $addToProject("Test Project", "Done")
