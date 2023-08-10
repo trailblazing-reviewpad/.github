@@ -1,10 +1,10 @@
 workflows:
   - name: empty description on issue
-    description: Check if the issue has a description and was created more 1 day ago
+    description: Check if the issue has a description and was created more than 1 minute ago
     on:
       - issue
     run:
-      - if: $description() == "" && $createdAt() > 0,001 days ago
+      - if: $description() == "" && $createdAt() < 1 minute ago
         then: $close("Automatically closing this issue. Please add a description.")
 
   - name: link issue to project
